@@ -25,7 +25,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey())).select()
-                .apis(RequestHandlerSelectors.basePackage("com.one2one.resource"))
+                .apis(RequestHandlerSelectors.basePackage("com.one2one.controllers"))
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build();
