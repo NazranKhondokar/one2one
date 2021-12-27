@@ -4,13 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "SUBJECT")
 @NoArgsConstructor
-public class Subject implements Serializable {
+public class Subject extends BaseEntity {
 
     private static final Long serialVersionUID = 1L;
 

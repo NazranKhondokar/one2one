@@ -1,6 +1,7 @@
 package com.one2one.controllers;
 
 import com.one2one.entities.Subject;
+import com.one2one.enums.RecordStatus;
 import com.one2one.exceptions.ResourceNotFoundException;
 import com.one2one.requests.SubjectRequest;
 import com.one2one.responses.SubjectResponse;
@@ -38,8 +39,6 @@ public class SubjectController {
     private final SubjectServiceImpl service;
     private final SubjectValidator validator;
     private final CommonDataHelper helper;
-    private final String[] sortable = {"id", "subjectName", "subjectNameBn"};
-    private final String[] searchable = {"subjectName", "subjectNameBn"};
 
     @GetMapping("/list")
     @ApiOperation(value = "get subject", response = SubjectResponse.class)
@@ -47,31 +46,23 @@ public class SubjectController {
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestParam(value = "sortBy", defaultValue = "") String sortBy,
-            @RequestParam(value = "search", defaultValue = "") String search
+            @RequestParam(value = "subjectName", defaultValue = "") String subjectName,
+            @RequestParam(value = "subjectTypeId", defaultValue = "") Long subjectTypeId
     ) {
         helper.setPageSize(page, size);
 
         PaginatedResponse response = new PaginatedResponse();
-        Map<String, Object> subjectMap = service.getList(sortable, searchable, sortBy, search, page, size);
+        Map<String, Object> subjectMap = service.searchSubject(subjectName, subjectTypeId, page, size, sortBy);
 
-        List<Subject> subjects = (List<Subject>) subjectMap.get("lists");
-        List<SubjectResponse> responses = subjects.stream().map(SubjectResponse::from)
+        List<Subject> responses = (List<Subject>) subjectMap.get("lists");
+
+        List<SubjectResponse> customResponses = responses.stream()
+                .map(SubjectResponse::from)
                 .collect(Collectors.toList());
 
-        helper.getCommonData(page, size, subjectMap, response, responses);
+        helper.getCommonData(page, size, subjectMap, response, customResponses);
 
         return ok(paginatedSuccess(response).getJson());
-    }
-
-    @GetMapping("/all")
-    @ApiOperation(value = "get all subject", response = SubjectResponse.class)
-    public ResponseEntity<JSONObject> findAll(
-            @RequestParam(value = "sortBy", defaultValue = "") String sortBy
-    ) {
-        List<SubjectResponse> responses = service.findAll(sortable, sortBy).stream().map(SubjectResponse::from)
-                .collect(Collectors.toList());
-
-        return ok(success(responses).getJson());
     }
 
     @GetMapping("/find/{id}")
@@ -123,5 +114,15 @@ public class SubjectController {
         service.delete(subject);
         return ok(success(null, SUBJECT_DELETE).getJson());
     }
+
+//    @PostMapping("/change-record-status/{id}/{status}")
+//    @ApiOperation(value = "subject record status update", response = SubjectResponse.class)
+//    public ResponseEntity<JSONObject> changeRecordStatus(@PathVariable Long id, @PathVariable RecordStatus status) {
+//
+//        Subject subject = service.findById(id);
+//        service.update(subject, status);
+//
+//        return ok(success(SubjectResponse.from(shift), RECORD_STATUS_UPDATE).getJson());
+//    }
 }
 
