@@ -4,7 +4,7 @@ import com.one2one.entities.Subject;
 import com.one2one.exceptions.ResourceNotFoundException;
 import com.one2one.requests.SubjectRequest;
 import com.one2one.responses.SubjectResponse;
-import com.one2one.services.SubjectService;
+import com.one2one.services.impl.SubjectServiceImpl;
 import com.one2one.utils.CommonDataHelper;
 import com.one2one.utils.PaginatedResponse;
 import com.one2one.validators.SubjectValidator;
@@ -35,7 +35,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @Api(tags = "Subject's Data")
 public class SubjectController {
 
-    private final SubjectService service;
+    private final SubjectServiceImpl service;
     private final SubjectValidator validator;
     private final CommonDataHelper helper;
     private final String[] sortable = {"id", "subjectName", "subjectNameBn"};

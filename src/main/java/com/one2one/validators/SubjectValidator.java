@@ -2,7 +2,7 @@ package com.one2one.validators;
 
 import com.one2one.entities.Subject;
 import com.one2one.requests.SubjectRequest;
-import com.one2one.services.SubjectService;
+import com.one2one.services.impl.SubjectServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -18,7 +18,7 @@ import static com.one2one.utils.StringUtils.isNotEmpty;
 @RequiredArgsConstructor
 public class SubjectValidator implements Validator {
 
-    private final SubjectService service;
+    private final SubjectServiceImpl service;
 
     @Override
     public boolean supports(Class<?> clazz) {
