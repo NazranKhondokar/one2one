@@ -1,23 +1,41 @@
 package com.one2one.services;
 
 import com.one2one.entities.Subject;
+import com.one2one.enums.RecordStatus;
+import com.one2one.exceptions.ResourceNotFoundException;
+import com.one2one.repositories.SubjectRepository;
+import com.one2one.requests.SubjectRequest;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 import java.util.Optional;
 
-public interface SubjectService {
+@RequiredArgsConstructor
+public abstract class SubjectService {
 
-    Subject save(Subject subject);
+    protected final SubjectRepository repository;
 
-    Subject update(Subject subject);
+    protected abstract Subject save(SubjectRequest request);
 
-    Optional<Subject> findById(Long id);
+    protected abstract Subject update(SubjectRequest request);
 
-    Optional<Subject> findBySubjectName(String subjectName);
+    protected abstract Subject update(Long id, RecordStatus status);
 
-    Optional<Subject> findBySubjectNameBn(String subjectNameBn);
+    protected abstract Optional<Subject> findById(Long id);
 
-    void delete(Subject subject);
+    protected abstract Optional<Subject> findBySubjectName(String subjectName);
 
-    Map<String, Object> searchSubject(String subjectName, Long subjectTypeId, Integer page, Integer size, String sortBy);
+    protected abstract Optional<Subject> findBySubjectNameBn(String subjectNameBn);
+
+    protected abstract void delete(Subject subject);
+
+    protected abstract Map<String, Object> searchSubject(String subjectName, Long subjectTypeId, Integer page, Integer size, String sortBy);
+
+    public Subject findSubjectById(Long id) {
+        Optional<Subject> subject = repository.findById(id);
+        if (subject.isEmpty()) {
+            throw new ResourceNotFoundException(String.format("Subject was not found for parameters {id=%s}", id));
+        }
+        return subject.get();
+    }
 }

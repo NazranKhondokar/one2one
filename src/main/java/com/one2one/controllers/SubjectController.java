@@ -85,8 +85,7 @@ public class SubjectController {
             return badRequest().body(error(fieldError(bindingResult)).getJson());
         }
 
-        Subject subject = request.to(request);
-        service.save(subject);
+        Subject subject = service.save(request);
         return ok(success(SubjectResponse.from(subject), SUBJECT_SAVE).getJson());
     }
 
@@ -98,31 +97,16 @@ public class SubjectController {
             return badRequest().body(error(fieldError(bindingResult)).getJson());
         }
 
-        Subject subject = service.findById(request.getId()).orElseThrow(
-                () -> new ResourceNotFoundException("subject type not found" + request.getId())
-        );
-        request.update(request, subject);
-        service.update(subject);
+        Subject subject = service.update(request);
         return ok(success(SubjectResponse.from(subject), SUBJECT_UPDATE).getJson());
     }
 
-    @DeleteMapping("/delete/{id}")
-    @ApiOperation("delete subject by id")
-    public ResponseEntity<JSONObject> delete(@PathVariable Long id) {
+    @PutMapping("/change-record-status/{id}/{status}")
+    @ApiOperation(value = "subject record status update", response = SubjectResponse.class)
+    public ResponseEntity<JSONObject> changeRecordStatus(@PathVariable Long id, @PathVariable RecordStatus status) {
 
-        Subject subject = service.findById(id).orElseThrow(ResourceNotFoundException::new);
-        service.delete(subject);
-        return ok(success(null, SUBJECT_DELETE).getJson());
+        Subject subject = service.update(id, status);
+        return ok(success(SubjectResponse.from(subject), RECORD_STATUS_UPDATE).getJson());
     }
-
-//    @PostMapping("/change-record-status/{id}/{status}")
-//    @ApiOperation(value = "subject record status update", response = SubjectResponse.class)
-//    public ResponseEntity<JSONObject> changeRecordStatus(@PathVariable Long id, @PathVariable RecordStatus status) {
-//
-//        Subject subject = service.findById(id);
-//        service.update(subject, status);
-//
-//        return ok(success(SubjectResponse.from(shift), RECORD_STATUS_UPDATE).getJson());
-//    }
 }
 

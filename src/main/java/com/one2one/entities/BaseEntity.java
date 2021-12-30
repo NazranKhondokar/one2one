@@ -35,7 +35,7 @@ public abstract class BaseEntity implements Serializable {
 
     //default one, auto increment for each operation like update
     @JsonIgnore
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "RECORD_STATUS")
     private RecordStatus recordStatus;
 

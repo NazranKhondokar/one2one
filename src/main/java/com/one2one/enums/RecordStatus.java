@@ -2,17 +2,17 @@ package com.one2one.enums;
 
 public enum RecordStatus {
 
-    DRAFT(0),
-    ACTIVE(1),
-    DELETED(2);
+    DRAFT("DRAFT"),
+    ACTIVE("ACTIVE"),
+    DELETED("DELETED");
 
-    private final Integer label;
+    private final String label;
 
-    RecordStatus(Integer label) {
+    RecordStatus(String label) {
         this.label = label;
     }
 
-    public Integer getLabel() {
+    public String getLabel() {
         return label;
     }
 }
