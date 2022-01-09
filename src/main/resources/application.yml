@@ -16,9 +16,9 @@ spring:
 
   # Database Configuration
   datasource:
-    url: jdbc:mysql://localhost:3306/one2one?useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8
-    username: root
-    password: root
+    url: jdbc:mysql://awsdemo.ciyidojun6nb.us-east-2.rds.amazonaws.com:3306/sys
+    username: admin
+    password: nbr12345
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     # Hikari Configuration
@@ -34,6 +34,8 @@ spring:
   jpa:
     # Properties
     properties:
+      # Hibernate Properties
+      # The SQL dialect makes Hibernate generate better SQL for the chosen database
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         naming:
