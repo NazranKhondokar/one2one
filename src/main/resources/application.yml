@@ -37,6 +37,7 @@ spring:
       # Hibernate Properties
       # The SQL dialect makes Hibernate generate better SQL for the chosen database
       hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         naming:
           implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
