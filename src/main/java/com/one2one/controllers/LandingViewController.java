@@ -1,28 +1,25 @@
 package com.one2one.controllers;
 
-import com.one2one.entities.Subject;
-import com.one2one.enums.RecordStatus;
+import com.one2one.entities.LandingView;
 import com.one2one.exceptions.ResourceNotFoundException;
-import com.one2one.requests.SubjectRequest;
+import com.one2one.requests.LandingViewRequest;
+import com.one2one.responses.LandingViewResponse;
 import com.one2one.responses.SubjectResponse;
-import com.one2one.services.impl.SubjectServiceImpl;
+import com.one2one.services.impl.LandingViewImpl;
 import com.one2one.utils.CommonDataHelper;
 import com.one2one.utils.PaginatedResponse;
-import com.one2one.validators.SubjectValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
+
+
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.one2one.constant.MessageConstants.*;
 import static com.one2one.exceptions.ApiError.fieldError;
@@ -36,76 +33,57 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(path = "api/v1/landingView")
 @Api(tags = "LandingView's Data")
 public class LandingViewController {
-    private final SubjectServiceImpl service;
-    private final SubjectValidator validator;
     private final CommonDataHelper helper;
+    private final LandingViewImpl service;
+
 
     @GetMapping("/list")
-    @ApiOperation(value = "get subject", response = SubjectResponse.class)
+    @ApiOperation(value = "get landingView", response = SubjectResponse.class)
     public ResponseEntity<JSONObject> getList(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestParam(value = "sortBy", defaultValue = "") String sortBy,
-            @RequestParam(value = "subjectName", defaultValue = "") String subjectName,
-            @RequestParam(value = "subjectTypeId", defaultValue = "") Long subjectTypeId
+            @RequestParam(value = "review_id", defaultValue = "") Long reviewId,
+            @RequestParam(value = "promotion_id", defaultValue = "") Long promotionId,
+            @RequestParam(value = "class_id", defaultValue = "") Long classId,
+            @RequestParam(value = "view_id", defaultValue = "") Long viewId
     ) {
         helper.setPageSize(page, size);
 
         PaginatedResponse response = new PaginatedResponse();
-        Map<String, Object> subjectMap = service.searchSubject(subjectName, subjectTypeId, page, size, sortBy);
-
-        List<Subject> responses = (List<Subject>) subjectMap.get("lists");
-
-        List<SubjectResponse> customResponses = responses.stream()
-                .map(SubjectResponse::from)
-                .collect(Collectors.toList());
-
-        helper.getCommonData(page, size, subjectMap, response, customResponses);
 
         return ok(paginatedSuccess(response).getJson());
     }
 
     @GetMapping("/find/{id}")
-    @ApiOperation(value = "get subject by id", response = SubjectResponse.class)
+    @ApiOperation(value = "get landingView by id", response = LandingViewResponse.class)
     public ResponseEntity<JSONObject> findById(@PathVariable Long id) {
-
-        Optional<SubjectResponse> response = Optional.ofNullable(service.findById(id).map(SubjectResponse::from)
+        Optional<LandingViewResponse> response = Optional.ofNullable(service.findById(id).map(LandingViewResponse::from)
                 .orElseThrow(ResourceNotFoundException::new));
 
         return ok(success(response).getJson());
     }
 
     @PostMapping("/save")
-    @ApiOperation(value = "save subject", response = SubjectResponse.class)
-    public ResponseEntity<JSONObject> save(@Valid @RequestBody SubjectRequest request, BindingResult bindingResult) {
-
-        ValidationUtils.invokeValidator(validator, request, bindingResult);
+    @ApiOperation(value = "save landingView", response = LandingViewResponse.class)
+    public ResponseEntity<JSONObject> save(@Valid @RequestBody LandingViewRequest request, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return badRequest().body(error(fieldError(bindingResult)).getJson());
         }
-
-        Subject subject = service.save(request);
-        return ok(success(SubjectResponse.from(subject), SUBJECT_SAVE).getJson());
+        LandingView landingView = service.save(request);
+        return ok(success(LandingViewResponse.from(landingView), LANDINGVIEW_SAVE).getJson());
     }
 
     @PutMapping("/update")
-    @ApiOperation(value = "update subject", response = SubjectResponse.class)
-    public ResponseEntity<JSONObject> update(@Valid @RequestBody SubjectRequest request, BindingResult bindingResult) {
+    @ApiOperation(value = "update landingView", response = LandingViewResponse.class)
+    public ResponseEntity<JSONObject> update(@Valid @RequestBody LandingViewRequest request, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return badRequest().body(error(fieldError(bindingResult)).getJson());
         }
 
-        Subject subject = service.update(request);
-        return ok(success(SubjectResponse.from(subject), SUBJECT_UPDATE).getJson());
-    }
-
-    @PutMapping("/change-record-status/{id}/{status}")
-    @ApiOperation(value = "subject record status update", response = SubjectResponse.class)
-    public ResponseEntity<JSONObject> changeRecordStatus(@PathVariable Long id, @PathVariable RecordStatus status) {
-
-        Subject subject = service.update(id, status);
-        return ok(success(SubjectResponse.from(subject), RECORD_STATUS_UPDATE).getJson());
+        LandingView landingView = service.update(request);
+        return ok(success(LandingViewResponse.from(landingView), LANDINGVIEWE_UPDATE).getJson());
     }
 }
