@@ -1,11 +1,11 @@
 # Server Configuration
 server:
-  port: 8532
+  port: 5000
   error:
     include-stacktrace: always
   compression:
     enabled: true
-  address: 0.0.0.0
+#  address: 0.0.0.0
 
 
 
