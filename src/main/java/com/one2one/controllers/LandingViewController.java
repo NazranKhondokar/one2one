@@ -27,15 +27,15 @@ import java.util.stream.Collectors;
 import static com.one2one.constant.MessageConstants.*;
 import static com.one2one.exceptions.ApiError.fieldError;
 import static com.one2one.utils.ResponseBuilder.*;
+import static com.one2one.utils.ResponseBuilder.success;
 import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "api/v1/subject")
-@Api(tags = "Subject's Data")
-public class  SubjectController {
-
+@RequestMapping(path = "api/v1/landingView")
+@Api(tags = "LandingView's Data")
+public class LandingViewController {
     private final SubjectServiceImpl service;
     private final SubjectValidator validator;
     private final CommonDataHelper helper;
@@ -109,4 +109,3 @@ public class  SubjectController {
         return ok(success(SubjectResponse.from(subject), RECORD_STATUS_UPDATE).getJson());
     }
 }
-
