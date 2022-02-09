@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class SubjectServiceImpl extends SubjectService {
+public class  SubjectServiceImpl extends SubjectService {
 
     private final SubjectHelper subjectHelper;
 
