@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LandingViewRepository extends JpaRepository<LandingView, Long> {
 
-//   @Query("SELECT * FROM LandingView l")
-//   Page<LandingView> searchLandingView(Long landingViewId, Pageable pageable);
+   @Query("SELECT l FROM LandingView l WHERE "+ "(:landingViewId IS NULL OR l.view_id = :landingViewId)")
+   Page<LandingView> searchLandingView(Long landingViewId, Pageable pageable);
 
 }
