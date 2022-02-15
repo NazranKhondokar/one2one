@@ -1,6 +1,7 @@
 package com.one2one.controllers;
 
 import com.one2one.entities.LandingView;
+import com.one2one.entities.Subject;
 import com.one2one.exceptions.ResourceNotFoundException;
 import com.one2one.requests.LandingViewRequest;
 import com.one2one.responses.LandingViewResponse;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.one2one.constant.MessageConstants.*;
 import static com.one2one.exceptions.ApiError.fieldError;
@@ -43,15 +47,15 @@ public class LandingViewController {
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestParam(value = "sortBy", defaultValue = "") String sortBy,
-            @RequestParam(value = "review_id", defaultValue = "") Long reviewId,
-            @RequestParam(value = "promotion_id", defaultValue = "") Long promotionId,
-            @RequestParam(value = "class_id", defaultValue = "") Long classId,
-            @RequestParam(value = "view_id", defaultValue = "") Long viewId
+            @RequestParam(value = "view_id", defaultValue = "1") Long landingviewId
     ) {
         helper.setPageSize(page, size);
 
         PaginatedResponse response = new PaginatedResponse();
-
+        Map<String, Object>landingViewMap = service.searchLandingView(landingviewId, page, size, sortBy);
+        List<LandingView> responses = (List<LandingView>) landingViewMap.get("lists");
+        List<LandingViewResponse> customResponses = responses.stream().map(LandingViewResponse::from).collect(Collectors.toList());
+        helper.getCommonData(page, size, landingViewMap, response, customResponses);
         return ok(paginatedSuccess(response).getJson());
     }
 

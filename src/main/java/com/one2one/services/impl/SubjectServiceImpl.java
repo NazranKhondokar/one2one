@@ -64,8 +64,11 @@ public class  SubjectServiceImpl extends SubjectService {
     public Map<String, Object> searchSubject(String subjectName, Long subjectTypeId,
                                              Integer page, Integer size, String sortBy) {
         ServiceHelper<Subject> helper = new ServiceHelper<>(Subject.class);
-        return helper.getList(repository.searchSubject(subjectName, subjectTypeId,
-                helper.getPageable(sortBy, page, size)), page, size);
+        return helper.getList(
+                repository.searchSubject(subjectName, subjectTypeId,
+                helper.getPageable(sortBy, page, size)),
+                page,
+                size);
     }
 
     @Override
