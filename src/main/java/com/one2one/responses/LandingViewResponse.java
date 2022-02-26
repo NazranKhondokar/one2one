@@ -10,10 +10,10 @@ import org.springframework.beans.BeanUtils;
 @NoArgsConstructor
 
 public class LandingViewResponse {
-    private Long landingViewId;
-    private Long classId;
-    private Long promotionId;
-    private Long reviewId;
+    private Long landingview_id;
+    private Long class_id;
+    private Long promotion_id;
+    private Long review_id;
 
 
     public static LandingViewResponse from(LandingView landingView) {
