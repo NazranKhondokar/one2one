@@ -1,14 +1,12 @@
 package com.one2one.services.impl;
 
 import com.one2one.entities.LandingView;
-import com.one2one.entities.Subject;
 import com.one2one.enums.RecordStatus;
 import com.one2one.helper.LandingViewHelper;
 import com.one2one.repositories.LandingViewRepository;
 import com.one2one.requests.LandingViewRequest;
 import com.one2one.services.LandingViewService;
 import com.one2one.utils.ServiceHelper;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -34,7 +32,7 @@ public class LandingViewImpl extends LandingViewService {
     @Override
     @Transactional
     public LandingView update(LandingViewRequest request) {
-            LandingView landingView = findLandViewById(request.getLandingview_id());
+        LandingView landingView = findLandViewById(request.getLandingview_id());
         request.update(request, landingView);
         return repository.save(landingView);
     }
