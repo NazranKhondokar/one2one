@@ -1,7 +1,7 @@
 package com.one2one.config;
 
 
-import com.one2one.security.CustomUserDetailsService;
+import com.one2one.services.CustomUserDetailsService;
 import com.one2one.security.JwtAuthenticationEntryPoint;
 import com.one2one.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
