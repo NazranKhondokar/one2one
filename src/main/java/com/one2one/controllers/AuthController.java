@@ -125,7 +125,7 @@ public class AuthController {
         SignUpResponse signUpResponse = new SignUpResponse();
 
         signUpResponse.setEmail(user.getEmail());
-        signUpResponse.setUser_name(user.getUser_name());
+        signUpResponse.setUserName(user.getUser_name());
         signUpResponse.setMobile(user.getMobile());
         signUpResponse.setStatus(SUCCESS);
 
