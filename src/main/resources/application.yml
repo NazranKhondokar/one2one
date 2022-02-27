@@ -68,11 +68,11 @@ spring:
       max-request-size: 512MB
       resolve-lazily: false
 
-  # Redis Configuration
-  redis:
-    host: 192.168.1.17
-    port: 6379
-    connect-timeout: 21600
+#  # Redis Configuration
+#  redis:
+#    host: 192.168.1.17
+#    port: 6379
+#    connect-timeout: 21600
 
 
 # Management Configuration
@@ -82,8 +82,8 @@ management:
       exposure:
         include: "*"
 
-ftpFileUploadPath: /one2one-service
+#ftpFileUploadPath: /one2one-service
 
-redis:
-  host: 192.168.1.17
-  port: 6379
+#redis:
+#  host: 192.168.1.17
+#  port: 6379

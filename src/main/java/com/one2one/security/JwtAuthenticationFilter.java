@@ -1,5 +1,6 @@
 package com.one2one.security;
 
+import com.one2one.services.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
