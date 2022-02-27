@@ -77,7 +77,7 @@ public class AuthController {
             LoginResponse loginResponse = new LoginResponse();
             loginResponse.setEmail(user.get().getEmail());
             loginResponse.setStatus("Success");
-            loginResponse.setUser_name(user.get().getUser_name());
+            loginResponse.setUserName(user.get().getUser_name());
             loginResponse.setRoles(user.get().getRoles());
 
 //        User user = new User();
@@ -139,7 +139,7 @@ public class AuthController {
         SignUpResponse signUpResponse = new SignUpResponse();
 
         signUpResponse.setEmail(user.getEmail());
-        signUpResponse.setUser_name(user.getUser_name());
+        signUpResponse.setUserName(user.getUser_name());
         signUpResponse.setMobile(user.getMobile());
         signUpResponse.setStatus("success");
 

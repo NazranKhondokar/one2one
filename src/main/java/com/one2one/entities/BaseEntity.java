@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.one2one.enums.RecordStatus;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -33,19 +31,18 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "RECORD_VERSION")
     private Integer recordVersion;
 
-    //default one, auto increment for each operation like update
     @JsonIgnore
     @Enumerated(EnumType.STRING)
-    @Column(name = "RECORD_STATUS")
+    @Column(name = "RECORD_STATUS", length = 10)
     private RecordStatus recordStatus;
 
-//    @Type(type = "uuid-char")
-//    @Column(name = "CREATOR", updatable = false)
-//    private UUID createdBy;
-//
-//    @Type(type = "uuid-char")
-//    @Column(name = "UPDATOR")
-//    private UUID updatedBy;
+    @JsonIgnore
+    @Column(name = "CREATOR", updatable = false)
+    private Long createdBy;
+
+    @JsonIgnore
+    @Column(name = "UPDATER")
+    private Long updatedBy;
 
     @PrePersist
     public void prePersist() {
