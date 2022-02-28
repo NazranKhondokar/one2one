@@ -26,15 +26,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Optional;
-
-import static com.one2one.constant.ResponseStatus.SUCCESS;
 
 @RestController
 @RequiredArgsConstructor
@@ -72,14 +69,7 @@ public class AuthController {
         Optional<User> user = userRepository.findByMobileOrEmail(loginRequest.getMobileOrEmail(), loginRequest.getMobileOrEmail());
 
         if (response.getStatus() == 200) {
-            LoginResponse loginResponse = new LoginResponse();
-            loginResponse.setEmail(user.get().getEmail());
-            loginResponse.setStatus(SUCCESS);
-            loginResponse.setUserName(user.get().getUser_name());
-            loginResponse.setRoles(user.get().getRoles());
-
-            return ResponseEntity.ok(loginResponse);
-
+            return ResponseEntity.ok(LoginResponse.from(user.get()));
         } else if (response.getStatus() == 401) {
             BasicResponse basicResponse = new BasicResponse();
             basicResponse.setResult(false);
@@ -121,14 +111,6 @@ public class AuthController {
         userRole.setStatusName("ACTIVE");
 
         user.setRoles(Collections.singleton(userRole));
-
-        SignUpResponse signUpResponse = new SignUpResponse();
-
-        signUpResponse.setEmail(user.getEmail());
-        signUpResponse.setUserName(user.getUser_name());
-        signUpResponse.setMobile(user.getMobile());
-        signUpResponse.setStatus(SUCCESS);
-
-        return ResponseEntity.ok(signUpResponse);
+        return ResponseEntity.ok(SignUpResponse.from(user));
     }
 }

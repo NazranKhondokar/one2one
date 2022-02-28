@@ -1,15 +1,16 @@
 package com.one2one.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "USERS", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
@@ -19,6 +20,7 @@ import java.util.Set;
                 "USER_MOBILE"
         })
 })
+@NoArgsConstructor
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,74 +51,12 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
 
-    public User() {
-
-    }
-
-
-    public User(@NotBlank @Size(max = 40) String user_name, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 40) String mobile, @NotBlank @Size(max = 100) String password, @NotBlank boolean isActive, Set<Role> roles) {
-        this.userName = user_name;
+    public User(String userName, String email, String mobile, String password, boolean isActive, Set<Role> roles) {
+        this.userName = userName;
         this.email = email;
         this.mobile = mobile;
         this.password = password;
         this.isActive = isActive;
         this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUser_name() {
-        return userName;
-    }
-
-    public void setUser_name(String user_name) {
-        this.userName = user_name;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 }

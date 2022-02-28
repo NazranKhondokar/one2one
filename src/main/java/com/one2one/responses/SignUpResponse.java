@@ -1,9 +1,10 @@
 package com.one2one.responses;
 
-import com.one2one.entities.Subject;
+import com.one2one.entities.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
+
+import static com.one2one.constant.ResponseStatus.SUCCESS;
 
 @Data
 @NoArgsConstructor
@@ -14,9 +15,12 @@ public class SignUpResponse {
     private String mobile;
     private String status;
 
-    public static SubjectResponse from(Subject subject) {
-        SubjectResponse response = new SubjectResponse();
-        BeanUtils.copyProperties(subject, response);
+    public static SignUpResponse from(User user) {
+        SignUpResponse response = new SignUpResponse();
+        response.setUserName(user.getUserName());
+        response.setEmail(user.getEmail());
+        response.setMobile(user.getMobile());
+        response.setStatus(SUCCESS);
         return response;
     }
 }

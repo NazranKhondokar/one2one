@@ -3,7 +3,6 @@ package com.one2one.responses;
 import com.one2one.entities.Subject;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +16,10 @@ public class SubjectResponse {
 
     public static SubjectResponse from(Subject subject) {
         SubjectResponse response = new SubjectResponse();
-        BeanUtils.copyProperties(subject, response);
+        response.setId(subject.getId());
+        response.setSubjectName(subject.getSubjectName());
+        response.setSubjectNameBn(subject.getSubjectNameBn());
+        response.setSubjectCode(subject.getSubjectCode());
         return response;
     }
 }
