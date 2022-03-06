@@ -32,6 +32,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -101,16 +102,17 @@ public class AuthController {
 
         // Creating user's account
         User user = new User(signUpRequest.getUserName(),
-                signUpRequest.getEmail(), signUpRequest.getMobile(), signUpRequest.getPassword(), signUpRequest.isActive(), signUpRequest.getRoles());
+                signUpRequest.getEmail(), signUpRequest.getMobile(), signUpRequest.getPassword(), signUpRequest.isActive());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_AGENT)
-                .orElseThrow(() -> new AppException("User Role not set."));
+//        Role userRole = roleRepository.findByName()
+//                .orElseThrow(() -> new AppException("User Role not set."));
+//
+//        userRole.setStatusName("ACTIVE");
 
-        userRole.setStatusName("ACTIVE");
-
-        user.setRoles(Collections.singleton(userRole));
+        user.setRoles(signUpRequest.getRoles());
+        userRepository.save(user);
         return ResponseEntity.ok(SignUpResponse.from(user));
     }
 }

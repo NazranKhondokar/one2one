@@ -51,12 +51,11 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String userName, String email, String mobile, String password, boolean isActive, Set<Role> roles) {
+    public User(String userName, String email, String mobile, String password, boolean isActive) {
         this.userName = userName;
         this.email = email;
         this.mobile = mobile;
         this.password = password;
         this.isActive = isActive;
-        this.roles = roles;
     }
 }
