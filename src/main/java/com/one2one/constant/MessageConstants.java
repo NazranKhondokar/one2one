@@ -12,4 +12,9 @@ public class MessageConstants {
     public static final String LANDINGVIEW_SAVE = "LandingView saved successfully";
     public static final String LANDINGVIEWE_UPDATE = "LandingView updated successfully";
     public static final String LANDINGVIEW_DELETE = "LandingView deleted successfully";
+
+    // Address
+    public static final String ADDRESS_SAVE = "Address saved successfully";
+    public static final String ADDRESS_UPDATE = "Address updated successfully";
+    public static final String ADDRESS_DELETE = "Address deleted successfully";
 }
