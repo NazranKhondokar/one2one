@@ -7,6 +7,7 @@ import com.one2one.repositories.LandingViewRepository;
 import com.one2one.requests.LandingViewRequest;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -22,6 +23,8 @@ public abstract class LandingViewService {
     protected abstract Optional<LandingView> findById(Long id);
 
     protected abstract void delete(LandingView landingView);
+
+    protected abstract Map<String, Object> searchLandingView(Long landingViewId, Integer page, Integer size, String sortBy);
 
     public LandingView findLandViewById(Long id) {
         Optional<LandingView> landingView = repository.findById(id);

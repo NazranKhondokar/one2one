@@ -16,9 +16,17 @@ spring:
 
   # Database Configuration
   datasource:
+    #live
     url: jdbc:mysql://aws.ciyidojun6nb.us-east-2.rds.amazonaws.com:3306/awsdemo
     username: admin
     password: nbr12345
+
+    #local
+#    url: jdbc:mysql://localhost:3306/one2one
+#    username: root
+#    password: root
+
+
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     # Hikari Configuration
@@ -68,11 +76,11 @@ spring:
       max-request-size: 512MB
       resolve-lazily: false
 
-  # Redis Configuration
-  redis:
-    host: 192.168.1.17
-    port: 6379
-    connect-timeout: 21600
+#  # Redis Configuration
+#  redis:
+#    host: 192.168.1.17
+#    port: 6379
+#    connect-timeout: 21600
 
 
 # Management Configuration
@@ -82,8 +90,8 @@ management:
       exposure:
         include: "*"
 
-ftpFileUploadPath: /one2one-service
+#ftpFileUploadPath: /one2one-service
 
-redis:
-  host: 192.168.1.17
-  port: 6379
+#redis:
+#  host: 192.168.1.17
+#  port: 6379

@@ -14,7 +14,7 @@ public class LandingView extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "VIEW_ID")
-    private Long view_id;
+    private Long landingview_id;
 
     @Column(name = "CLASS_ID")
     private Long class_id;
@@ -24,4 +24,5 @@ public class LandingView extends BaseEntity {
 
     @Column(name = "REVIEW_ID")
     private Long review_id;
+
 }
