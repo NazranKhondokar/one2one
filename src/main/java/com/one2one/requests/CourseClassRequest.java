@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-public class PackageClassRequest {
+public class CourseClassRequest {
 
     @NotNull
     private Long academicClassId;
@@ -21,7 +21,7 @@ public class PackageClassRequest {
 
     @NotNull
     private Long teacherUserId;
-    private Boolean packageClassIsPaid;
-    private Boolean packageClassIsEnrolled;
+    private Boolean courseClassIsPaid;
+    private Boolean courseClassIsEnrolled;
 }
 

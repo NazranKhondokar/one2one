@@ -23,6 +23,6 @@ public class MessageConstants {
     public static final String LANDINGCLASS_UPDATE = "LandingClass updated successfully";
     public static final String LANDINGCLASS_DELETE = "LandingClass deleted successfully";
 
-    public static final String PACKAGE_CLASS_SAVE = "Package class saved successfully";
+    public static final String COURSE_CLASS_SAVE = "Course class saved successfully";
 
 }
