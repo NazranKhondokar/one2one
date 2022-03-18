@@ -1,6 +1,7 @@
 package com.one2one.entities;
 
 import com.one2one.entities.composite.CourseClassCompositeKey;
+import com.one2one.entities.composite.CourseUserCompositeKey;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,23 +9,19 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "COURSE_CLASS")
+@Table(name = "COURSE_USER")
 @NoArgsConstructor
-public class CourseClass extends BaseEntity {
+public class CourseUser extends BaseEntity {
 
     private static final Long serialVersionUID = 1L;
 
     @EmbeddedId
-    private CourseClassCompositeKey compositeKey;
+    private CourseUserCompositeKey compositeKey;
 
     @Column(name = "COMPLETION")
     private Integer completion;
 
-    @Column(name = "ZOOM_CREDENTIAL")
-    private String zoomCredential;
-
-    @OneToOne
-    @JoinColumn(name = "CLASS_MATERIAL_ID")
-    private ClassMaterial classMaterial;
+    @Column(name = "HAS_COURSE_ENROLLED")
+    private Boolean hasCourseEnrolled;
 }
 

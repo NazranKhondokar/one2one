@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 @Embeddable
 @NoArgsConstructor
-public class CourseClassCompositeKey implements Serializable {
+public class CourseUserCompositeKey implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,20 +22,11 @@ public class CourseClassCompositeKey implements Serializable {
     @JoinColumn(name = "COURSE_ID")
     private Course course;
 
-    @Column(name = "SUBJECT_ID")
-    private Long subjectId;
-
     @Column(name = "STUDENT_USER_ID")
     private Long studentUserId;
 
-    @Column(name = "TEACHER_USER_ID")
-    private Long teacherUserId;
-
-    public CourseClassCompositeKey(Course course, Long subjectId,
-                                   Long studentUserId, Long teacherUserId) {
+    public CourseUserCompositeKey(Course course, Long studentUserId) {
         this.course = course;
-        this.subjectId = subjectId;
         this.studentUserId = studentUserId;
-        this.teacherUserId = teacherUserId;
     }
 }

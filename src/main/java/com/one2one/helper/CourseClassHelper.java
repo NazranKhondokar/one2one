@@ -29,8 +29,7 @@ public class CourseClassHelper {
         Map<String, Integer> courseClassIdToVersion = new HashMap<>();
 
         for (CourseClass courseClass : course.getCourseClasses()) {
-            courseClassIdToVersion.put("%s-%s-%s-%s-%s".formatted(course.getId(),
-                    courseClass.getCompositeKey().getAcademicClassId(),
+            courseClassIdToVersion.put("%s-%s-%s-%s".formatted(course.getId(),
                     courseClass.getCompositeKey().getSubjectId(),
                     courseClass.getCompositeKey().getStudentUserId(),
                     courseClass.getCompositeKey().getTeacherUserId()),
@@ -42,17 +41,15 @@ public class CourseClassHelper {
 
         for (CourseClassRequest courseClassRequest : dto.getCourseClasses()) {
             CourseClass courseClass = new CourseClass();
-            courseClass.setCourseClassIsPaid(courseClassRequest.getCourseClassIsPaid());
-            courseClass.setCourseClassIsEnrolled(courseClassRequest.getCourseClassIsEnrolled());
             courseClass.setRecordVersion(courseClassIdToVersion
-                    .getOrDefault("%s-%s-%s-%s-%s".formatted(
+                    .getOrDefault("%s-%s-%s-%s".formatted(
                             course.getId(),
                             courseClassRequest.getAcademicClassId(),
                             courseClassRequest.getSubjectId(),
                             courseClassRequest.getStudentUserId(),
                             courseClassRequest.getTeacherUserId()), 0));
             courseClass.setCompositeKey(new CourseClassCompositeKey(
-                    course, courseClassRequest.getAcademicClassId(),
+                    course,
                     courseClassRequest.getSubjectId(),
                     courseClassRequest.getStudentUserId(),
                     courseClassRequest.getTeacherUserId()));
