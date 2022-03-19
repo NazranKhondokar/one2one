@@ -7,22 +7,24 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "LANDINGVIEW")
+@Table(name = "LANDING_VIEW")
 @NoArgsConstructor
-
 public class LandingView extends BaseEntity {
+
+    private static final Long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "VIEW_ID")
-    private Long landingview_id;
+    @Column(name = "LANDING_VIEW_ID")
+    private Long landingViewId;
 
     @Column(name = "CLASS_ID")
-    private Long class_id;
+    private Long classId;
 
     @Column(name = "PROMOTION_ID")
-    private Long promotion_id;
+    private Long promotionId;
 
     @Column(name = "REVIEW_ID")
-    private Long review_id;
+    private Long reviewId;
 
 }

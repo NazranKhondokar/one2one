@@ -7,10 +7,10 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "LANDINGCLASS")
+@Table(name = "LANDING_CLASS")
 @NoArgsConstructor
+public class LandingClass extends BaseEntity {
 
-public class LandingClass extends BaseEntity{
     private static final Long serialVersionUID = 1L;
 
     @Id
@@ -25,7 +25,7 @@ public class LandingClass extends BaseEntity{
     private String imageUrl;
 
     @Column(name = "CLASS_ID")
-    private Long ClassId;
+    private Long classId;
 
     @Column(name = "DESCRIPTION")
     private String description;

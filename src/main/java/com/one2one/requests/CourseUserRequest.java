@@ -3,12 +3,11 @@ package com.one2one.requests;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-public class CourseClassRequest {
+public class CourseUserRequest {
 
     @NotNull
     private Long subjectId;
@@ -16,9 +15,7 @@ public class CourseClassRequest {
     @NotNull
     private Long studentUserId;
 
-    @NotNull
-    private Long teacherUserId;
     private Integer completion;
-    private String zoomCredential;
+    private Boolean hasCourseEnrolled;
 }
 

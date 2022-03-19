@@ -12,10 +12,10 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class LandingViewRequest {
 
-    private Long landingview_id;
-    private Long class_id;
-    private Long promotion_id;
-    private Long review_id;
+    private Long landingViewId;
+    private Long classId;
+    private Long promotionId;
+    private Long reviewId;
 
     public LandingView to(LandingViewRequest request) {
         LandingView landingView = new LandingView();

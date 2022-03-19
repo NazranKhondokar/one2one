@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LandingClassRepository extends JpaRepository<LandingClass, Long> {
+
     @Query("SELECT l FROM LandingClass l WHERE "+ "(:landingClassId IS NULL OR l.landingClassId = :landingClassId)")
     Page<LandingClass> searchLandingClass(Long landingClassId, Pageable pageable);
 }

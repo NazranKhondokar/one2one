@@ -47,5 +47,8 @@ public class Course extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compositeKey.course"/*, orphanRemoval = true*/)
     private List<CourseClass> courseClasses;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compositeKey.course"/*, orphanRemoval = true*/)
+    private List<CourseUser> courseUsers;
 }
 

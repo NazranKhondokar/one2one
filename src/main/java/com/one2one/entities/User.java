@@ -22,6 +22,7 @@ import java.util.Set;
 })
 @NoArgsConstructor
 public class User extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
@@ -44,6 +45,14 @@ public class User extends BaseEntity {
 
     @Column(name = "IS_ACTIVE")
     private boolean isActive = true;
+
+    @OneToOne
+    @JoinColumn(name = "INSTITUTION_ID")
+    private Institution institution;
+
+    @OneToOne
+    @JoinColumn(name = "ADDRESS_ID")
+    private Address address;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLES",

@@ -41,10 +41,11 @@ public class CourseClassHelper {
 
         for (CourseClassRequest courseClassRequest : dto.getCourseClasses()) {
             CourseClass courseClass = new CourseClass();
+            courseClass.setCompletion(courseClassRequest.getCompletion());
+            courseClass.setZoomCredential(courseClassRequest.getZoomCredential());
             courseClass.setRecordVersion(courseClassIdToVersion
                     .getOrDefault("%s-%s-%s-%s".formatted(
                             course.getId(),
-                            courseClassRequest.getAcademicClassId(),
                             courseClassRequest.getSubjectId(),
                             courseClassRequest.getStudentUserId(),
                             courseClassRequest.getTeacherUserId()), 0));

@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class LandingViewImpl extends LandingViewService {
+
     private final LandingViewHelper landingViewHelper;
 
     public LandingViewImpl(LandingViewHelper landingViewHelper,LandingViewRepository repository) {
@@ -32,7 +33,7 @@ public class LandingViewImpl extends LandingViewService {
     @Override
     @Transactional
     public LandingView update(LandingViewRequest request) {
-        LandingView landingView = findLandViewById(request.getLandingview_id());
+        LandingView landingView = findLandViewById(request.getLandingViewId());
         request.update(request, landingView);
         return repository.save(landingView);
     }

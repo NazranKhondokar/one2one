@@ -11,7 +11,7 @@ public class LandingClassRequest {
     private Long landingClassId;
     private String landingClassName;
     private String imageUrl;
-    private Long ClassId;
+    private Long classId;
     private String description;
 
     public LandingClass to(LandingClassRequest request) {

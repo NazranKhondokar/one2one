@@ -24,5 +24,5 @@ public class MessageConstants {
     public static final String LANDINGCLASS_DELETE = "LandingClass deleted successfully";
 
     public static final String COURSE_CLASS_SAVE = "Course class saved successfully";
-
+    public static final String COURSE_USER_SAVE = "Course user saved successfully";
 }
