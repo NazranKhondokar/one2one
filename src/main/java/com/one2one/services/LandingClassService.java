@@ -14,18 +14,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class LandingClassService {
+
     protected final LandingClassRepository repository;
-
     protected abstract LandingClass save(LandingClassRequest request);
-
     protected abstract LandingClass update(LandingClassRequest request);
-
     protected abstract LandingClass update(Long id, RecordStatus status);
-
     protected abstract Optional<LandingClass> findById(Long id);
-
     protected abstract void delete(LandingClass landingClass);
-
     protected abstract Map<String, Object> searchLandingClass(Long landingClassId, Integer page, Integer size, String sortBy);
 
     public LandingClass findLandingClassById(Long id) {

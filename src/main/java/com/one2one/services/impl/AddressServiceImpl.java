@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @Service
 public class AddressServiceImpl extends AddressService {
+
     private final AddressHelper addressHelper;
 
     public AddressServiceImpl(AddressHelper addressHelper, AddressRepository addressRepository) {
@@ -45,7 +46,7 @@ public class AddressServiceImpl extends AddressService {
 
     @Override
     public Optional<Address> findByAddress(String address) {
-        return repository.findByAddress(address);
+        return repository.findByAddressDetail(address);
     }
 
     @Override

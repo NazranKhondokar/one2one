@@ -8,6 +8,5 @@ import lombok.RequiredArgsConstructor;
 public abstract class CourseUserService {
 
     protected final CourseRepository repository;
-
     public abstract void save(Course course);
 }

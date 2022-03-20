@@ -10,15 +10,27 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 public class AddressRequest {
-    private Long Id;
+
+    private Long id;
 
     @NotBlank
-    private String address;
+    private String addressDetail;
 
     private Long postId;
     private Long thanaId;
     private Long districtId;
     private Long divisionId;
+
+    public Address to(){
+        Address address = new Address();
+        address.setId(id);
+        address.setAddressDetail(addressDetail);
+        address.setPostId(postId);
+        address.setThanaId(thanaId);
+        address.setDistrictId(districtId);
+        address.setDivisionId(divisionId);
+        return address;
+    }
 
     public Address to(AddressRequest request){
         Address address = new Address();

@@ -29,10 +29,10 @@ public class AddressValidator implements Validator {
     public void validate(Object target, Errors error) {
         AddressRequest request = (AddressRequest) target;
 
-        if (isNotEmpty(request.getAddress())) {
-            Optional<Address> address = service.findByAddress(request.getAddress());
+        if (isNotEmpty(request.getAddressDetail())) {
+            Optional<Address> address = service.findByAddress(request.getAddressDetail());
             if (address.isPresent()) {
-                error.rejectValue("subjectName", null, ALREADY_EXIST);
+                error.rejectValue("addressDetail", null, ALREADY_EXIST);
             }
         }
     }

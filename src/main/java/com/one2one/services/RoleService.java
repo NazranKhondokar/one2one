@@ -13,11 +13,8 @@ import java.util.Optional;
 public abstract class RoleService {
 
     protected final RoleRepository repository;
-
     protected abstract Optional<Role> findById(Long id);
-
     protected abstract List<Role> findAll();
-
     protected abstract Optional<Role> findByRoleName(RoleName RoleName);
 
     public Role findRoleById(Long id) {

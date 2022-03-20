@@ -7,7 +7,9 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -50,9 +52,9 @@ public class User extends BaseEntity {
     @JoinColumn(name = "INSTITUTION_ID")
     private Institution institution;
 
-    @OneToOne
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ADDRESS_ID")
-    private Address address;
+    List<Address> addresses;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLES",
@@ -66,5 +68,10 @@ public class User extends BaseEntity {
         this.mobile = mobile;
         this.password = password;
         this.isActive = isActive;
+    }
+
+    public void addAddresses(List<Address> list) {
+        if (this.addresses == null) this.addresses = new ArrayList<>();
+        this.addresses.addAll(list);
     }
 }

@@ -2,13 +2,11 @@ package com.one2one.controllers;
 
 import com.one2one.entities.Address;
 
-import com.one2one.entities.Subject;
 import com.one2one.enums.RecordStatus;
 import com.one2one.exceptions.ResourceNotFoundException;
 import com.one2one.requests.AddressRequest;
 import com.one2one.responses.AddressResponse;
 
-import com.one2one.responses.SubjectResponse;
 import com.one2one.services.impl.AddressServiceImpl;
 import com.one2one.utils.CommonDataHelper;
 import com.one2one.utils.PaginatedResponse;
@@ -40,6 +38,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(path = "api/address")
 @Api("Address's Data")
 public class AddressController {
+
     private final AddressServiceImpl service;
     private final AddressValidator validator;
     private final CommonDataHelper helper;
@@ -64,7 +63,6 @@ public class AddressController {
                 .collect(Collectors.toList());
 
         helper.getCommonData(page, size, addressMap, response, customResponses);
-
 
         return ok(paginatedSuccess(response).getJson());
     }
@@ -113,5 +111,4 @@ public class AddressController {
         Address address = service.update(id, status);
         return ok(success(AddressResponse.from(address), RECORD_STATUS_UPDATE).getJson());
     }
-
 }

@@ -14,21 +14,13 @@ import java.util.Optional;
 public abstract class SubjectService {
 
     protected final SubjectRepository repository;
-
     protected abstract Subject save(SubjectRequest request);
-
     protected abstract Subject update(SubjectRequest request);
-
     protected abstract Subject update(Long id, RecordStatus status);
-
     protected abstract Optional<Subject> findById(Long id);
-
     protected abstract Optional<Subject> findBySubjectName(String subjectName);
-
     protected abstract Optional<Subject> findBySubjectNameBn(String subjectNameBn);
-
     protected abstract void delete(Subject subject);
-
     protected abstract Map<String, Object> searchSubject(String subjectName, Long subjectTypeId, Integer page, Integer size, String sortBy);
 
     public Subject findSubjectById(Long id) {

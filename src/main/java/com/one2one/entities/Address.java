@@ -15,10 +15,10 @@ public class Address extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ADDRESS_ID")
-    private Long Id;
+    private Long id;
 
     @Column(name = "ADDRESS", columnDefinition = "nvarchar(255)")
-    private String address;
+    private String addressDetail;
 
     @Column(name = "POST")
     private Long postId;

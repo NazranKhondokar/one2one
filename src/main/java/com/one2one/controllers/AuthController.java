@@ -41,18 +41,13 @@ import java.util.Set;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final JwtTokenProvider tokenProvider;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getMobileOrEmail(),
@@ -84,8 +79,6 @@ public class AuthController {
 
             return ResponseEntity.created(URI.create("basicResponse")).body(basicResponse);
         }
-
-
     }
 
     @PostMapping("/register")

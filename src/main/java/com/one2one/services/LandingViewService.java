@@ -12,18 +12,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class LandingViewService {
+
     protected final LandingViewRepository repository;
-
     protected abstract LandingView save(LandingViewRequest request);
-
     protected abstract LandingView update(LandingViewRequest request);
-
     protected abstract LandingView update(Long id, RecordStatus status);
-
     protected abstract Optional<LandingView> findById(Long id);
-
     protected abstract void delete(LandingView landingView);
-
     protected abstract Map<String, Object> searchLandingView(Long landingViewId, Integer page, Integer size, String sortBy);
 
     public LandingView findLandViewById(Long id) {
