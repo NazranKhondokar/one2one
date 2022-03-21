@@ -53,7 +53,7 @@ public class User extends BaseEntity {
     private Institution institution;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ADDRESS_ID")
+    @JoinColumn(name = "USER_ID")
     List<Address> addresses;
 
     @ManyToMany(fetch = FetchType.EAGER)
