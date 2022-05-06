@@ -45,10 +45,12 @@ public class Course extends BaseEntity {
     @JoinColumn(name = "SUBJECT_GROUP_ID")
     private SubjectGroup subjectGroup;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compositeKey.course"/*, orphanRemoval = true*/)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "COURSE_CLASS_ID")
     private List<CourseClass> courseClasses;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compositeKey.course"/*, orphanRemoval = true*/)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "COURSE_USER_ID")
     private List<CourseUser> courseUsers;
 }
 

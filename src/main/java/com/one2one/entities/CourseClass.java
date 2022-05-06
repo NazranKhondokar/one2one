@@ -1,6 +1,5 @@
 package com.one2one.entities;
 
-import com.one2one.entities.composite.CourseClassCompositeKey;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,8 +13,22 @@ public class CourseClass extends BaseEntity {
 
     private static final Long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private CourseClassCompositeKey compositeKey;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "COURSE_CLASS_ID")
+    private Long id;
+
+    @JoinColumn(name = "COURSE_ID")
+    private Long courseId;
+
+    @Column(name = "SUBJECT_ID")
+    private Long subjectId;
+
+    @Column(name = "STUDENT_USER_ID")
+    private Long studentUserId;
+
+    @Column(name = "TEACHER_USER_ID")
+    private Long teacherUserId;
 
     @Column(name = "COMPLETION")
     private Integer completion;

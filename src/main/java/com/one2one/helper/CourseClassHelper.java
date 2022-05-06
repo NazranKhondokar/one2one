@@ -24,38 +24,14 @@ public class CourseClassHelper {
         baseEntity.setRecordStatus(recordStatus);
     }
 
-    public void setCourseClass(CourseClassListRequest dto, Course course,
-                                RecordStatus recordStatus) {
-        Map<String, Integer> courseClassIdToVersion = new HashMap<>();
-
-        for (CourseClass courseClass : course.getCourseClasses()) {
-            courseClassIdToVersion.put("%s-%s-%s-%s".formatted(course.getId(),
-                    courseClass.getCompositeKey().getSubjectId(),
-                    courseClass.getCompositeKey().getStudentUserId(),
-                    courseClass.getCompositeKey().getTeacherUserId()),
-                    courseClass.getRecordVersion());
-        }
+    public void setCourseClassDtoToEntity(CourseClassListRequest dto, Course course, RecordStatus recordStatus) {
         course.getCourseClasses().clear();
 
-        if (Objects.isNull(dto.getCourseClasses())) return;
+        if (Objects.isNull(dto.getCourseClasses()) || dto.getCourseClasses().isEmpty()) return;
 
         for (CourseClassRequest courseClassRequest : dto.getCourseClasses()) {
-            CourseClass courseClass = new CourseClass();
-            courseClass.setCompletion(courseClassRequest.getCompletion());
-            courseClass.setZoomCredential(courseClassRequest.getZoomCredential());
-            courseClass.setRecordVersion(courseClassIdToVersion
-                    .getOrDefault("%s-%s-%s-%s".formatted(
-                            course.getId(),
-                            courseClassRequest.getSubjectId(),
-                            courseClassRequest.getStudentUserId(),
-                            courseClassRequest.getTeacherUserId()), 0));
-            courseClass.setCompositeKey(new CourseClassCompositeKey(
-                    course,
-                    courseClassRequest.getSubjectId(),
-                    courseClassRequest.getStudentUserId(),
-                    courseClassRequest.getTeacherUserId()));
+            CourseClass courseClass = courseClassRequest.toEntity(course);
             setBaseEntityProperties(courseClass, recordStatus);
-            course.getCourseClasses().add(courseClass);
         }
     }
 }

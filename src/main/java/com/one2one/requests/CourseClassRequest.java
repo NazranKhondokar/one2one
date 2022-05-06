@@ -1,5 +1,7 @@
 package com.one2one.requests;
 
+import com.one2one.entities.Course;
+import com.one2one.entities.CourseClass;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,5 +22,17 @@ public class CourseClassRequest {
     private Long teacherUserId;
     private Integer completion;
     private String zoomCredential;
+
+    public CourseClass toEntity(Course course) {
+        CourseClass courseClass = new CourseClass();
+        courseClass.setCourseId(course.getId());
+        courseClass.setCompletion(this.completion);
+        courseClass.setZoomCredential(this.zoomCredential);
+        courseClass.setStudentUserId(this.studentUserId);
+        courseClass.setTeacherUserId(this.teacherUserId);
+        courseClass.setSubjectId(this.subjectId);
+        course.getCourseClasses().add(courseClass);
+        return courseClass;
+    }
 }
 

@@ -6,7 +6,6 @@ import com.one2one.helper.CourseClassHelper;
 import com.one2one.repositories.CourseRepository;
 import com.one2one.requests.CourseClassListRequest;
 import com.one2one.services.CourseClassService;
-import com.one2one.validators.SubjectValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,9 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 import static com.one2one.constant.MessageConstants.COURSE_CLASS_SAVE;
+import static com.one2one.utils.ResponseBuilder.error;
 import static com.one2one.utils.ResponseBuilder.success;
+import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -40,9 +41,11 @@ public class CourseClassController {
     public ResponseEntity<JSONObject> save(@Valid @RequestBody CourseClassListRequest request, BindingResult bindingResult) {
 
         Optional<Course> course = courseRepository.findById(request.getCourseId());
-        helper.setCourseClass(request, course.get(), RecordStatus.ACTIVE);
-        service.save(course.get());
-        return ok(success(null, COURSE_CLASS_SAVE).getJson());
+        if (course.isPresent()) {
+            helper.setCourseClassDtoToEntity(request, course.get(), RecordStatus.ACTIVE);
+            service.save(course.get());
+            return ok(success(null, COURSE_CLASS_SAVE).getJson());
+        } else return badRequest().body(error(null, "Course not found!!").getJson());
     }
 }
 
